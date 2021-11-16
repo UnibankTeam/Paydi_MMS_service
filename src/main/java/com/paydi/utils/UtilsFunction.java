@@ -6,10 +6,11 @@ import java.util.HashMap;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paydi.config.multitenancy.TenantStorage;
 import com.paydi.constant.CommonConstant;
+import com.paydi.entity.MMSAppAccessEntity;
 import com.paydi.entity.MMSMsgLogEntity;
 import com.paydi.entity.MMSServiceLogEntity;
 import com.paydi.repository.MMSServiceLogRepository;
-import com.paydi.repository.MMSUltilRepository;
+import com.paydi.repository.MMSUtilRepository;
 import com.paydi.repository.MQMsgLogRepository;
 
 import org.slf4j.Logger;
@@ -30,12 +31,12 @@ public class UtilsFunction {
 
 	private static final Logger logger = LoggerFactory.getLogger(UtilsFunction.class);
 	private MMSServiceLogRepository serviceLogRepository;
-	private MMSUltilRepository ultilRepository;
+	private MMSUtilRepository ultilRepository;
 	private MQMsgLogRepository mqMsgLogRepository;
 	private RestTemplate restTemplate;
 
 	@Autowired
-	public UtilsFunction(MMSServiceLogRepository serviceLogRepository, MMSUltilRepository ultilRepository,
+	public UtilsFunction(MMSServiceLogRepository serviceLogRepository, MMSUtilRepository ultilRepository,
 			MQMsgLogRepository mqMsgLogRepository, RestTemplate restTemplate) {
 		this.serviceLogRepository = serviceLogRepository;
 		this.ultilRepository = ultilRepository;
@@ -143,22 +144,16 @@ public class UtilsFunction {
 		return null;
 	}
 
-	public void initTenantSetting(String coreTenant) {
-
-		String tenantDb = null;
-		String tenantCoreServer = null;
+	public void initTenantSetting(String coreTenant, MMSAppAccessEntity appAccessEntity) {
 
 		try {
 			TenantStorage.setCurrentTenant(coreTenant);
+			TenantStorage.setCurrentTenantExternalId(appAccessEntity.getExternalId());
 
-			tenantDb = FileUtils.getPropertyTenant(CommonConstant.TENANT_DB_KEY);
-			tenantCoreServer = FileUtils.getPropertyTenant(CommonConstant.TENANT_URL_KEY);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		TenantStorage.setCurrentTenantDB(tenantDb);
-		TenantStorage.setCurrentTenantUrlServer(tenantCoreServer);
 
 	}
 

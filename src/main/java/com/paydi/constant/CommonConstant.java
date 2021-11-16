@@ -15,10 +15,10 @@ public class CommonConstant {
 	public static final String FILE_UPLOAD_RECODE_STATUS_FAILED = "F";
 	public static final String FILE_UPLOAD_RECODE_STATUS_COMPLETED = "C";
 	
-	public static final String API_CODE_SUCCESS = "200";
-	public static final String API_CODE_FAIL = "404";
-	public static final String API_CODE_UNAUTHORIZE = "401";
-	public static final String API_CODE_ERRER_COMMON = "500";
+	public static final int API_CODE_SUCCESS = 200;
+	public static final int API_CODE_FAIL = 404;
+	public static final int API_CODE_UNAUTHORIZE = 401;
+	public static final int API_CODE_ERRER_COMMON = 500;
 	public static final String API_MESSAGE_SUCCESS = "success";
 	public static final String API_MESSAGE_FAIL = "failure";
 	public static final String API_MESSAGE_UNAUTHORIZE = "Unauthorize with Core";

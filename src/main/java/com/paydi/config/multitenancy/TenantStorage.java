@@ -8,8 +8,10 @@ public class TenantStorage {
 
 	private static ThreadLocal<String> currentApiKey = new ThreadLocal<>();
 
+	private static ThreadLocal<String> currentTenantExternalId = new ThreadLocal<>();
+
 	private static ThreadLocal<String> currentTenantDB = new ThreadLocal<>();
-	
+
 	private static ThreadLocal<String> currentTenantUrlServer = new ThreadLocal<>();
 
 	public static void setCurrentApiKey(String apiKey) {
@@ -18,6 +20,14 @@ public class TenantStorage {
 
 	public static String getCurrentApiKey() {
 		return currentApiKey.get();
+	}
+
+	public static String getCurrentTenantExternalId() {
+		return currentTenantExternalId.get();
+	}
+
+	public static void setCurrentTenantExternalId(String externalId) {
+		currentTenantExternalId.set(externalId);
 	}
 
 	public static void setCurrentTenant(String tenantId) {
@@ -50,7 +60,7 @@ public class TenantStorage {
 	public static String getCurrentTenantDB() {
 		return currentTenantDB.get();
 	}
-	
+
 	public static void setCurrentTenantUrlServer(String tenantId) {
 		currentTenantUrlServer.set(tenantId);
 	}

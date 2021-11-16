@@ -1,21 +1,42 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : 3.105.25.202 - dev (AWS)
- Source Server Type    : MySQL
- Source Server Version : 100604
- Source Host           : 3.105.25.202:7777
- Source Schema         : billpos_loyalty
-
- Target Server Type    : MySQL
- Target Server Version : 100604
- File Encoding         : 65001
-
- Date: 13/09/2021 16:17:00
-*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+
+-- ----------------------------
+-- Table structure for mms_api_key_access
+-- ----------------------------
+CREATE TABLE `mms_api_key_access` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `api_key` char(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `app_id` bigint(20) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `desc` varchar(500) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' ,
+  `status` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `valid_from_date` datetime DEFAULT NULL,
+  `valid_to_date` datetime DEFAULT NULL,
+  `created_by` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- ----------------------------
+-- Table structure for mms_app_access
+-- ----------------------------
+CREATE TABLE `mms_app_access` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` char(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `desc` varchar(500) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `external_id` varchar(25) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' ,
+  `status` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `created_by` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 -- ----------------------------

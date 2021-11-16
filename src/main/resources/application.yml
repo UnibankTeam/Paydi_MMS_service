@@ -12,8 +12,8 @@ server:
     threads:
       max: 200
   servlet: 
-   context-path: /loyalty-api
-   
+   context-path: /mms
+
 spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
@@ -33,6 +33,13 @@ spring:
     cache: false
   flyway:
     enabled: false
+
+
+  redis:
+    host: localhost
+    port:  6379 
+
+
   rabbitmq:
     host: Paydi-mqueue
     port: 15692
@@ -61,8 +68,8 @@ logging:
             sql:
               BasicBinder: ERROR
 
-# sentry:
-  # dsn: DNS
+sentry:
+  dsn: http://8dc5bd99fbe54a129965619a391f7b84@sentry.kiotthe.app/12
   # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
   # We recommend adjusting this value in production.
-  # traces-sample-rate: 1.0              
+  traces-sample-rate: 1.0              

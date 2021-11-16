@@ -11,24 +11,15 @@ import org.springframework.web.context.request.WebRequestInterceptor;
 @Component
 public class TenantInterceptor implements WebRequestInterceptor {
 
-
     @Override
     public void preHandle(WebRequest request) {
-        TenantStorage.setCurrentTenant(request.getHeader(CommonConstant.TENANT_HEADER));
-        TenantStorage.setCurrentUID(request.getHeader(CommonConstant.UID_HEADER));
-        TenantStorage.setCurrentApiKey(request.getHeader(CommonConstant.API_KEY_HEADER));
-        
         try {
-			String tenantDb = FileUtils.getPropertyTenant(CommonConstant.TENANT_DB_KEY);
-			String tenantCoreServer = FileUtils.getPropertyTenant(CommonConstant.TENANT_URL_KEY);
-	        TenantStorage.setCurrentTenantDB(tenantDb);
-	        TenantStorage.setCurrentTenantUrlServer(tenantCoreServer);
+        TenantStorage.setCurrentTenant(request.getHeader(CommonConstant.TENANT_HEADER));
 
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
