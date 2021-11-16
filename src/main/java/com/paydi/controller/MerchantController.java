@@ -48,7 +48,8 @@ public class MerchantController extends ControllerBase {
 			return makeResponse(jwtResponse);
 		} catch (Exception e) {
 			Sentry.captureException(e);
-			return makeResponse(new ErrorsResponse(CommonConstant.API_MESSAGE_FAIL, 500, "internal server error!", null));
+			return makeResponse(
+					new ErrorsResponse(CommonConstant.API_MESSAGE_FAIL, 500, "internal server error!", null));
 		}
 	}
 
