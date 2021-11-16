@@ -1,0 +1,68 @@
+tenants:
+  datasources:
+   default:
+     jdbcUrl: jdbc:mysql://localhost:3306/mms_tenant_default?useUnicode=yes&characterEncoding=UTF-8
+     driverClassName: com.mysql.cj.jdbc.Driver
+     username: username
+     password: password
+      
+server: 
+  port: 81
+  tomcat:
+    threads:
+      max: 200
+  servlet: 
+   context-path: /loyalty-api
+   
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  datasource:
+    hikari:
+      data-source-properties:
+        useConfigs: maxPerformance
+        rewriteBatchedStatements: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 10MB
+  thymeleaf:
+    cache: false
+  flyway:
+    enabled: false
+  rabbitmq:
+    host: Paydi-mqueue
+    port: 15692
+    username: Paydi
+    password: Anhnh7383@
+    virtual-host: /loyalty
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3s
+          max-attempts: 6
+          max-interval: 10s
+          multiplier: 2
+  main:
+    allow-bean-definition-overriding: true
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: ERROR
+
+# sentry:
+  # dsn: DNS
+  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
+  # We recommend adjusting this value in production.
+  # traces-sample-rate: 1.0              
