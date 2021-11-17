@@ -1,6 +1,5 @@
 package com.paydi.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 import io.sentry.Sentry;
 
 @Service
-public class AuthenApiService {
+public class AuthApiService {
 
     @Autowired
     private StringRedisTemplate template;
@@ -26,8 +25,8 @@ public class AuthenApiService {
 
         MMSAppAccessEntity appAccessEntity = null;
         try {
-            // In ra màn hình Giá trị của key "loda" trong Redis
-            String listString = (String) template.opsForValue().get("accessInfo");
+
+            String listString = template.opsForValue().get("accessInfo");
 
             ObjectMapper mapper = new ObjectMapper();
             List<MMSAppAccessEntity> list = null;
@@ -37,8 +36,11 @@ public class AuthenApiService {
                 });
             }
             if (list == null) {
-                list = new ArrayList<MMSAppAccessEntity>();
-            } else {
+                list = ultilRepository.getAppAccessInfo();
+
+                String jsonInString = mapper.writeValueAsString(list);
+                template.opsForValue().set("accessInfo", jsonInString);
+
                 for (int i = 0; i < list.size(); i++) {
                     MMSAppAccessEntity mmsAppAccessEntity = list.get(i);
 
@@ -46,16 +48,13 @@ public class AuthenApiService {
                         appAccessEntity = mmsAppAccessEntity;
                     }
                 }
+            } else {
+                for (int i = 0; i < list.size(); i++) {
+                    MMSAppAccessEntity mmsAppAccessEntity = list.get(i);
 
-            }
-
-            if (appAccessEntity == null) {
-                appAccessEntity = ultilRepository.checkApiKey(apiKey);
-                if (appAccessEntity != null) {
-
-                    list.add(appAccessEntity);
-                    String jsonInString = mapper.writeValueAsString(list);
-                    template.opsForValue().set("accessInfo", jsonInString);
+                    if (mmsAppAccessEntity.getApiKey().equals(apiKey)) {
+                        appAccessEntity = mmsAppAccessEntity;
+                    }
                 }
 
             }

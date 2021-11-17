@@ -1,5 +1,7 @@
 package com.paydi.repository;
 
+import java.util.List;
+
 import com.paydi.config.multitenancy.TenantStorage;
 import com.paydi.entity.MMSAppAccessEntity;
 
@@ -46,6 +48,24 @@ public class MMSUtilRepository {
 			return jdbcTemplate.queryForObject(sql.toString(), new Object[] { apiKey },
 					(rs, rowNum) -> new MMSAppAccessEntity(rs.getLong("id"), rs.getString("api_key"),
 							rs.getString("name"), rs.getString("desc"), rs.getString("external_id")));
+		} catch (Exception e) {
+			Sentry.captureException(e);
+			return null;
+		}
+	}
+
+	public List<MMSAppAccessEntity> getAppAccessInfo() {
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append(" SELECT ap.*, akc.api_key ");
+			sql.append(" FROM mms_api_key_access akc ");
+			sql.append(" JOIN mms_app_access ap ON ap.id = akc.app_id ");
+			// sql.append(" WHERE akc.api_key = ? ");
+
+			return jdbcTemplate.query(sql.toString(), new Object[] {},
+					(rs, rowNum) -> new MMSAppAccessEntity(rs.getLong("id"), rs.getString("api_key"),
+							rs.getString("name"), rs.getString("desc"), rs.getString("external_id")));
+
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return null;

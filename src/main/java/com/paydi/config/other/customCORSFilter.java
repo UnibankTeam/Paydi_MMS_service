@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.paydi.constant.CommonConstant;
 import com.paydi.entity.MMSAppAccessEntity;
 import com.paydi.repository.MMSUtilRepository;
-import com.paydi.service.AuthenApiService;
+import com.paydi.service.AuthApiService;
 import com.paydi.utils.FileUtils;
 import com.paydi.utils.UtilsFunction;
 
@@ -24,7 +24,7 @@ import io.sentry.Sentry;
 public class customCORSFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private AuthenApiService authenApiService;
+	private AuthApiService authApiService;
 	@Autowired
 	private UtilsFunction utilsFunction;
 
@@ -40,7 +40,7 @@ public class customCORSFilter extends OncePerRequestFilter {
 		String apiKeyHeader = request.getHeader(CommonConstant.API_KEY_HEADER);
 		String coreTenant = request.getHeader(CommonConstant.TENANT_HEADER);
 		// check valid api key
-		MMSAppAccessEntity appAccessEntity = authenApiService.checkApiKey(apiKeyHeader);
+		MMSAppAccessEntity appAccessEntity = authApiService.checkApiKey(apiKeyHeader);
 		if (appAccessEntity == null) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			return;

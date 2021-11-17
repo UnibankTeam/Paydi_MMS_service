@@ -6,7 +6,7 @@ public class TenantStorage {
 
 	private static ThreadLocal<String> currentUID = new ThreadLocal<>();
 
-	private static ThreadLocal<String> currentApiKey = new ThreadLocal<>();
+	private static ThreadLocal<Long> currentAppId = new ThreadLocal<>();
 
 	private static ThreadLocal<String> currentTenantExternalId = new ThreadLocal<>();
 
@@ -14,12 +14,12 @@ public class TenantStorage {
 
 	private static ThreadLocal<String> currentTenantUrlServer = new ThreadLocal<>();
 
-	public static void setCurrentApiKey(String apiKey) {
-		currentApiKey.set(apiKey);
+	public static void setCurrentAppId(Long appId) {
+		currentAppId.set(appId);
 	}
 
-	public static String getCurrentApiKey() {
-		return currentApiKey.get();
+	public static Long getCurrentAppId() {
+		return currentAppId.get();
 	}
 
 	public static String getCurrentTenantExternalId() {

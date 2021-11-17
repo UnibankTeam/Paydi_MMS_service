@@ -1,7 +1,6 @@
 package com.paydi.config.multitenancy;
 
 import com.paydi.constant.CommonConstant;
-import com.paydi.utils.FileUtils;
 
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
@@ -14,10 +13,10 @@ public class TenantInterceptor implements WebRequestInterceptor {
     @Override
     public void preHandle(WebRequest request) {
         try {
-        TenantStorage.setCurrentTenant(request.getHeader(CommonConstant.TENANT_HEADER));
+            TenantStorage.setCurrentTenant(request.getHeader(CommonConstant.TENANT_HEADER));
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
     }

@@ -149,6 +149,7 @@ public class UtilsFunction {
 		try {
 			TenantStorage.setCurrentTenant(coreTenant);
 			TenantStorage.setCurrentTenantExternalId(appAccessEntity.getExternalId());
+			TenantStorage.setCurrentAppId(appAccessEntity.getId());
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
