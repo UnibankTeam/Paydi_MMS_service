@@ -16,11 +16,10 @@ public class ErrorsResponse {
 	public ErrorsResponse() {
 	}
 
-	public ErrorsResponse(String status, int statusCode, String error, HashMap<String, Object> result) {
+	public ErrorsResponse(int statusCode, String status, String error, HashMap<String, Object> result) {
 		this.status = status;
 		this.statusCode = statusCode;
 		this.error = error;
 	}
 
-	
 }
