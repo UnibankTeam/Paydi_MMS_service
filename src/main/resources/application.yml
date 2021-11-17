@@ -36,9 +36,25 @@ spring:
 
 
   redis:
-    host: localhost
-    port:  6379 
-
+    cluster:
+      nodes:
+        0: 203.205.21.196:6001
+        1: 203.205.21.196:6002
+        2: 203.205.21.196:6003
+      max-redirects: 3
+  
+  kafka: 
+    consumer:
+      bootstrap-servers: 203.205.21.196:9092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      
+    producer:
+      bootstrap-servers: 203.205.21.196:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
   rabbitmq:
     host: Paydi-mqueue
@@ -66,10 +82,10 @@ logging:
         type:
           descriptor:
             sql:
-              BasicBinder: ERROR
+              BasicBinder: TRACE
 
 sentry:
-  dsn: http://8dc5bd99fbe54a129965619a391f7b84@sentry.kiotthe.app/12
+  dsn: http://8dc5bd99fbe54a129965619a391f7b84@tracking.kiotthe.app/12
   # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
   # We recommend adjusting this value in production.
   traces-sample-rate: 1.0              
