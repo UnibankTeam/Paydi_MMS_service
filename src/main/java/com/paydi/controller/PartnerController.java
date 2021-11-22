@@ -65,7 +65,7 @@ public class PartnerController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -87,7 +87,7 @@ public class PartnerController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -106,7 +106,7 @@ public class PartnerController extends ControllerBase {
 				partnerServiceImpl.updatePartner(partnerEntity);
 			} else {
 				return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_NOT_FOUND,
-						CommonConstant.API_MESSAGE_FAIL, "error.msg.not.found", null));
+						CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_ERROR_NOT_FOUND, null));
 			}
 
 			String requestId = "_update-partner";
@@ -119,7 +119,7 @@ public class PartnerController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -143,7 +143,7 @@ public class PartnerController extends ControllerBase {
 
 			} else {
 				return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_DUPLICATE,
-						CommonConstant.API_MESSAGE_FAIL, "error.msg.duplicate", null));
+						CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_ERROR_DUPLICATE, null));
 			}
 
 			String requestId = "_add_partner";
@@ -155,7 +155,7 @@ public class PartnerController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 

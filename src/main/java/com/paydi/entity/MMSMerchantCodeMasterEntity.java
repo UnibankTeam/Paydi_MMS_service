@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "mms_mid_master")
-public class MerchantCodeMasterEntity {
+public class MMSMerchantCodeMasterEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -25,7 +25,7 @@ public class MerchantCodeMasterEntity {
 	@Column(name = "`desc`")
 	private String desc;
 
-	public MerchantCodeMasterEntity() {
+	public MMSMerchantCodeMasterEntity() {
 	}
 
 }

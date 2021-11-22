@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.paydi.constant.CommonConstant;
 import com.paydi.entity.MMSMerchantMasterEntity;
-import com.paydi.entity.MerchantCodeMasterEntity;
+import com.paydi.entity.MMSMerchantCodeMasterEntity;
 import com.paydi.model.ErrorsResponse;
 import com.paydi.model.SuccessResponse;
 import com.paydi.model.requestBody.RequestMerchantModel;
@@ -41,13 +41,15 @@ public class MerchantController extends ControllerBase {
 
 	}
 
+	
+
 	@SuppressWarnings("rawtypes")
 	@GetMapping(value = "template")
 	public ResponseEntity getMerchantInsertTemplate() throws Exception {
 
 		try {
 
-			List<MerchantCodeMasterEntity> listMerchantCode = this.merchantMasterServiceImpl
+			List<MMSMerchantCodeMasterEntity> listMerchantCode = this.merchantMasterServiceImpl
 					.findAllMerchantCodeMaster();
 			String requestId = "_get--template-merchant";
 			HashMap<String, Object> result = new HashMap<String, Object>();
@@ -59,7 +61,7 @@ public class MerchantController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -76,7 +78,7 @@ public class MerchantController extends ControllerBase {
 						CommonConstant.API_MESSAGE_FAIL, "error.msg.partner.not.found", null));
 			}
 
-			List<MerchantCodeMasterEntity> listMerchantCode = this.merchantMasterServiceImpl
+			List<MMSMerchantCodeMasterEntity> listMerchantCode = this.merchantMasterServiceImpl
 					.findAllMerchantCodeMaster();
 			String requestId = "_get-template-edit-merchant";
 			HashMap<String, Object> result = new HashMap<String, Object>();
@@ -89,7 +91,7 @@ public class MerchantController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -110,7 +112,7 @@ public class MerchantController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -131,7 +133,7 @@ public class MerchantController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -165,7 +167,7 @@ public class MerchantController extends ControllerBase {
 
 			} else {
 				return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_DUPLICATE,
-						CommonConstant.API_MESSAGE_FAIL, "error.msg.duplicate", null));
+						CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_ERROR_DUPLICATE, null));
 			}
 
 			String requestId = "_add-merchant";
@@ -178,7 +180,7 @@ public class MerchantController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 
@@ -208,7 +210,7 @@ public class MerchantController extends ControllerBase {
 
 			} else {
 				return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_NOT_FOUND,
-						CommonConstant.API_MESSAGE_FAIL, "error.msg.not.found", null));
+						CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_ERROR_NOT_FOUND, null));
 			}
 			String requestId = "_update-merchant";
 			HashMap<String, Object> result = new HashMap<String, Object>();
@@ -220,7 +222,7 @@ public class MerchantController extends ControllerBase {
 		} catch (Exception e) {
 			Sentry.captureException(e);
 			return makeResponse(new ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-					CommonConstant.API_MESSAGE_FAIL, e.toString(), null));
+					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
 

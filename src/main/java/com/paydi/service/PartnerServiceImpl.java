@@ -51,8 +51,20 @@ public class PartnerServiceImpl {
 
 	public List<MMSPartnerEntity> findAllPartner() {
 		try {
-			Iterable<MMSPartnerEntity> listPartner = partnerRepository.findAll();
-			return (List<MMSPartnerEntity>) listPartner;
+			StringBuffer sql = new StringBuffer();
+			sql.append(" SELECT `p`.* ");
+			sql.append(" FROM `mms_partner` `p` ");
+			sql.append(" JOIN `mms_app_access` `a` ON `a`.external_id = `p`.owner_external_id ");
+			sql.append(" JOIN `mms_app_access` `aAccess` ON `aAccess`.external_id = ? ");
+			sql.append(" WHERE   `a`.hierarchy LIKE Concat(`aAccess`.hierarchy, '%')  ");
+
+			String appExternalId = TenantStorage.getCurrentTenantExternalId();
+			Object[] listParam = new Object[] { appExternalId };
+
+			return jdbcTemplate.query(sql.toString(), listParam,
+					(rs, rowNum) -> new MMSPartnerEntity(rs.getLong("id"), rs.getString("code"), rs.getString("desc"),
+							rs.getString("owner_external_id"), rs.getString("odoo_contact_id")));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,6 +99,25 @@ public class PartnerServiceImpl {
 		try {
 			MMSPartnerEntity partners = partnerRepository.findByOdooContactId(contactId);
 			return partners;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public MMSPartnerEntity findByMerchantId(Long merchantId) {
+		try {
+			StringBuffer sql = new StringBuffer();
+			sql.append(" SELECT `p`.*  ");
+			sql.append(" FROM `mms_merchant` `m`  ");
+			sql.append(" JOIN `mms_partner` `p` ON `p`.id = `m`.partner_id ");
+			sql.append(" WHERE  `m`.id = ? LIMIT 1 ");
+
+			Object[] listParam = new Object[] { merchantId };
+
+			return jdbcTemplate.queryForObject(sql.toString(), listParam,
+					(rs, rowNum) -> new MMSPartnerEntity(rs.getLong("id"), rs.getString("code"), rs.getString("dec"),
+							rs.getString("odoo_contact_id"), rs.getString("owner_external_id")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

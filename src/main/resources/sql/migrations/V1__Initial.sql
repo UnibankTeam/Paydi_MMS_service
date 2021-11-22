@@ -28,6 +28,7 @@ CREATE TABLE `mms_api_key_access` (
 CREATE TABLE `mms_app_access` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` char(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `hierarchy` char(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `desc` varchar(500) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
   `external_id` varchar(25) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' ,
   `status` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '',

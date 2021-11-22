@@ -26,7 +26,9 @@ public class AuthApiService {
         MMSAppAccessEntity appAccessEntity = null;
         try {
 
-            String listString = template.opsForValue().get("accessInfo");
+            // for develop
+            String listString = null;
+            // String listString = template.opsForValue().get("accessInfo");
 
             ObjectMapper mapper = new ObjectMapper();
             List<MMSAppAccessEntity> list = null;

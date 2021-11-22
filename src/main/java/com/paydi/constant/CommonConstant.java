@@ -21,12 +21,19 @@ public class CommonConstant {
 	public static final int API_CODE_INTERNAL_SERVER_ERROR = 500;
 	public static final int API_CODE_NOT_FOUND = 400;
 	public static final int API_CODE_PARTNER_NOT_FOUND = 403;
+	public static final int API_CODE_MERCHANT_NOT_FOUND = 404;
+	public static final int API_CODE_BANK_NOT_FOUND = 405;
+	public static final int API_CODE_CARD_TYPE_NOT_FOUND = 406;
+	public static final int API_CODE_MISSING_POS_PARAMS = 407;
+	public static final int API_CODE_MISSING_RATE_POS_PARAMS = 408;
 	public static final int API_CODE_DUPLICATE = 402;
 
 	public static final String API_MESSAGE_SUCCESS = "success";
 	public static final String API_MESSAGE_FAIL = "failure";
-	public static final String API_MESSAGE_UNAUTHORIZE = "Unauthorize with Core";
-	public static final String API_MESSAGE_FAIL_666 = "666";
+	public static final String API_MESSAGE_INTERNAL_SERVER_ERROR = "internal.server.error";
+	public static final String API_MESSAGE_ERROR_NOT_FOUND = "error.msg.not.found";
+	public static final String API_MESSAGE_ERROR_DUPLICATE = "error.msg.duplicate";
+
 
 	public static final String TENANT_HEADER = "core-tenant";
 	public static final String UID_HEADER = "uid";
