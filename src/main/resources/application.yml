@@ -1,10 +1,10 @@
 tenants:
   datasources:
    default:
-     jdbcUrl: jdbc:mysql://localhost:3306/mms_tenant_default?useUnicode=yes&characterEncoding=UTF-8
+     jdbcUrl: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/mms_tenant_default?useUnicode=yes&characterEncoding=UTF-8
      driverClassName: com.mysql.cj.jdbc.Driver
-     username: username
-     password: password
+     username: ${DATABASE_USERNAME}
+     password: ${DATABASE_PASSWORD}
       
 server: 
   port: 81

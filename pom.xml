@@ -8,10 +8,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.paydi</groupId>
-	<artifactId>Paydi_Gateway_Services</artifactId>
+	<artifactId>Paydi_MMS_Services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Paydi_Gateway_Services</name>
-	<description>Paydi Gateway Services</description>
+	<name>Paydi_MMS_Services</name>
+	<description>Paydi MMS Services</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
