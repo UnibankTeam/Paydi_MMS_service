@@ -28,6 +28,10 @@ public class MMSAppAccessEntity {
 	private String desc;
 	@Column(name = "external_id")
 	private String externalId;
+	@Column(name = "hierarchy")
+	private String hierarchy;
+	@Column(name = "parent_id")
+	private String parentId;
 	@Column(name = "status")
 	private String status;
 	@Column(name = "created_by")
@@ -45,7 +49,7 @@ public class MMSAppAccessEntity {
 	public MMSAppAccessEntity() {
 	}
 
-	public MMSAppAccessEntity(long id,  String apiKey, String name, String desc, String externalId) {
+	public MMSAppAccessEntity(long id, String apiKey, String name, String desc, String externalId) {
 		this.id = id;
 		this.apiKey = apiKey;
 		this.name = name;
