@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.paydi.constant.CommonConstant;
 import com.paydi.convert.TerminalConverter;
-import com.paydi.convert.TidConverter;
+import com.paydi.entity.MMSBankEntity;
 import com.paydi.entity.MMSMerchantMasterEntity;
 import com.paydi.entity.MMSPartnerEntity;
 import com.paydi.entity.MMSTerminalEntity;
@@ -15,6 +15,7 @@ import com.paydi.model.MMSTerminalModel;
 import com.paydi.model.MethodResponseModel;
 import com.paydi.model.SuccessResponse;
 import com.paydi.model.requestBody.RequestTerminalModel;
+import com.paydi.repository.MMSBankRepository;
 import com.paydi.repository.MMSTerminalRepository;
 import com.paydi.service.MerchantMasterServiceImpl;
 import com.paydi.service.PartnerServiceImpl;
@@ -43,16 +44,18 @@ public class TerminalController extends ControllerBase {
 	private TerminalConverter terminalConverter;
 	private PosServiceImpl posServiceImpl;
 	private MerchantMasterServiceImpl merchantMasterServiceImpl;
+	private MMSBankRepository bankRepository;
 
 	@Autowired
 	public TerminalController(PartnerServiceImpl partnerServiceImpl, MMSTerminalRepository terminalRepository,
 			TerminalConverter terminalConverter, PosServiceImpl posServiceImpl,
-			MerchantMasterServiceImpl merchantMasterServiceImpl) {
+			MerchantMasterServiceImpl merchantMasterServiceImpl, MMSBankRepository bankRepository) {
 		this.partnerServiceImpl = partnerServiceImpl;
 		this.terminalRepository = terminalRepository;
 		this.terminalConverter = terminalConverter;
 		this.posServiceImpl = posServiceImpl;
 		this.merchantMasterServiceImpl = merchantMasterServiceImpl;
+		this.bankRepository = bankRepository;
 
 	}
 
@@ -112,10 +115,12 @@ public class TerminalController extends ControllerBase {
 
 			MMSMerchantMasterEntity merchantMasterEntity = this.merchantMasterServiceImpl.findById(merchantId);
 			MMSPartnerEntity partner = this.partnerServiceImpl.findByMerchantId(merchantId);
+			List<MMSBankEntity> listBank = this.bankRepository.findAll();
 
 			String requestId = "_get-template-new-terminal-by-merchant";
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			result.put("partner", partner);
+			result.put("listBank", listBank);
 			result.put("merchant", merchantMasterEntity);
 			return makeResponse(new SuccessResponse(requestId, CommonConstant.API_CODE_SUCCESS,
 					CommonConstant.API_MESSAGE_SUCCESS, result));
@@ -137,11 +142,13 @@ public class TerminalController extends ControllerBase {
 			// convert pos info
 			MMSTerminalModel terminal = terminalConverter.convertTerminalEntityToModel(terminalEntity);
 			List<MMSPartnerEntity> listPartner = partnerServiceImpl.findAllPartner();
+			List<MMSBankEntity> listBank = this.bankRepository.findAll();
 
 			String requestId = "_get-template-edit-terminal";
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			result.put("terminal", terminal);
 			result.put("listPartner", listPartner);
+			result.put("listBank", listBank);
 
 			return makeResponse(new SuccessResponse(requestId, CommonConstant.API_CODE_SUCCESS,
 					CommonConstant.API_MESSAGE_SUCCESS, result));
@@ -269,7 +276,6 @@ public class TerminalController extends ControllerBase {
 		try {
 
 			MMSTerminalEntity terminalEntity = this.terminalRepository.findBySerialNumber(serialNumber);
-
 			// convert pos info
 			MMSTerminalModel terminal = terminalConverter.convertTerminalEntityToModel(terminalEntity);
 
@@ -285,35 +291,5 @@ public class TerminalController extends ControllerBase {
 					CommonConstant.API_MESSAGE_FAIL, CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
 		}
 	}
-
-	// @SuppressWarnings("rawtypes")
-	// @GetMapping(value = "merchant/{merchantId}")
-	// public ResponseEntity getMerchant(@PathVariable(value = "merchantId") Long
-	// merchantId) throws Exception {
-
-	// try {
-
-	// List<MMSPosEntity> posEntities =
-	// this.posServiceImpl.findByMerchantId(merchantId);
-
-	// // convert pos info
-	// List<MMSPosModel> posModels =
-	// posConverter.convertPosEntityToModel(posEntities);
-
-	// String requestId = "_get-pos-by-merchant";
-	// HashMap<String, Object> result = new HashMap<String, Object>();
-	// result.put("listPos", posModels);
-	// return makeResponse(new SuccessResponse(requestId,
-	// CommonConstant.API_CODE_SUCCESS,
-	// CommonConstant.API_MESSAGE_SUCCESS, result));
-
-	// } catch (Exception e) {
-	// Sentry.captureException(e);
-	// return makeResponse(new
-	// ErrorsResponse(CommonConstant.API_CODE_INTERNAL_SERVER_ERROR,
-	// CommonConstant.API_MESSAGE_FAIL,
-	// CommonConstant.API_MESSAGE_INTERNAL_SERVER_ERROR, null));
-	// }
-	// }
 
 }

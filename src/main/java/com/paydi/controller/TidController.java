@@ -2,10 +2,8 @@ package com.paydi.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import com.paydi.constant.CommonConstant;
-import com.paydi.convert.TerminalConverter;
 import com.paydi.convert.TidConverter;
 import com.paydi.entity.MMSPosEntity;
 import com.paydi.model.ErrorsResponse;
@@ -14,8 +12,6 @@ import com.paydi.model.MethodResponseModel;
 import com.paydi.model.PosTemplateModel;
 import com.paydi.model.SuccessResponse;
 import com.paydi.model.requestBody.RequestPosModel;
-import com.paydi.repository.MMSTerminalRepository;
-import com.paydi.service.PartnerServiceImpl;
 import com.paydi.service.PosServiceImpl;
 import com.paydi.utils.ControllerBase;
 
@@ -36,19 +32,13 @@ import io.sentry.Sentry;
 @RequestMapping(value = "/tid")
 public class TidController extends ControllerBase {
 
-	private PartnerServiceImpl partnerServiceImpl;
-	private MMSTerminalRepository terminalRepository;
 	private TidConverter posConverter;
-	private TerminalConverter terminalConverter;
 	private PosServiceImpl posServiceImpl;
 
 	@Autowired
-	public TidController(PartnerServiceImpl partnerServiceImpl, MMSTerminalRepository terminalRepository,
-			TidConverter posConverter, TerminalConverter terminalConverter, PosServiceImpl posServiceImpl) {
-		this.partnerServiceImpl = partnerServiceImpl;
-		this.terminalRepository = terminalRepository;
+	public TidController(TidConverter posConverter, PosServiceImpl posServiceImpl) {
+
 		this.posConverter = posConverter;
-		this.terminalConverter = terminalConverter;
 		this.posServiceImpl = posServiceImpl;
 	}
 
