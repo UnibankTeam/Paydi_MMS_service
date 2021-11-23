@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `mms_pos_rate_config`  (
   `updated_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `updated_date` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `code` (`terminal_id`, `merchant_id`, `card_type`)
+  KEY `code` (`tid`, `merchant_id`, `card_type`)
   ) ENGINE = InnoDB  CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 
@@ -203,7 +203,7 @@ INSERT INTO `mms_card_type` (`id`, `digit`, `code`, `desc`) VALUES (4, '9', 'ATM
 
 CREATE TABLE IF NOT EXISTS `mms_bank`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `digit` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL ,
+  `digit` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL  DEFAULT '',
   `code` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
