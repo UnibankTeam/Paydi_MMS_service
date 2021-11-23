@@ -1,12 +1,9 @@
 package com.paydi.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.paydi.entity.MMSBankEntity;
 import com.paydi.entity.MMSMerchantMasterEntity;
-import com.paydi.entity.MMSTerminalEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +17,6 @@ public class MMSPosModel {
 	private String tid;
 	private String terminalName;
 	private Long minRevDefault;
-	private MMSBankEntity bankCode;
 	private int status;
 	private Long createdBy;
 	private Long updatedBy;

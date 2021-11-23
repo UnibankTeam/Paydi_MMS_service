@@ -106,14 +106,12 @@ public class PosServiceImpl {
 		MMSPosModel posModels = null;
 		try {
 			List<MMSCardTypeEntity> listCardType = this.MMSCardTypeRepository.findAll();
-			List<MMSBankEntity> listBank = this.MMSBankRepository.findAll();
 			if (id != null) {
 				MMSPosEntity posEntity = findById(id);
 				posModels = posConverter.convertPosEntityToModel(posEntity);
 
 			}
 			posTemplateModel.setListCardType(listCardType);
-			posTemplateModel.setListBank(listBank);
 			posTemplateModel.setPosEntity(posModels);
 			return posTemplateModel;
 		} catch (Exception e) {
