@@ -9,7 +9,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 CREATE TABLE `mms_api_key_access` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `api_key` char(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
-  `app_id` bigint(20) CHARACTER SET utf8mb4 NOT NULL DEFAULT '',
+  `app_id` bigint(20)  NOT NULL ,
   `desc` varchar(500) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' ,
   `status` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `valid_from_date` datetime DEFAULT NULL,
