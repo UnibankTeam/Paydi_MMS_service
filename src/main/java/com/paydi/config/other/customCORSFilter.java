@@ -37,7 +37,11 @@ public class customCORSFilter extends OncePerRequestFilter {
 		response.setHeader("Access-Control-Allow-Headers", "api-key, tenant, Authorization, content-type, xsrf-token");
 		response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
 
-		String apiKeyHeader = request.getHeader(CommonConstant.API_KEY_HEADER);
+		
+		if ("OPTIONS".equals(request.getMethod())) {
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			String apiKeyHeader = request.getHeader(CommonConstant.API_KEY_HEADER);
 		String coreTenant = request.getHeader(CommonConstant.TENANT_HEADER);
 		// check valid api key
 		MMSAppAccessEntity appAccessEntity = authApiService.checkApiKey(apiKeyHeader);
@@ -47,10 +51,6 @@ public class customCORSFilter extends OncePerRequestFilter {
 		} else {
 			utilsFunction.initTenantSetting(coreTenant, appAccessEntity);
 		}
-
-		if ("OPTIONS".equals(request.getMethod())) {
-			response.setStatus(HttpServletResponse.SC_OK);
-		} else {
 			Sentry.captureMessage("REQUEST_TRACKING");
 			filterChain.doFilter(request, response);
 		}

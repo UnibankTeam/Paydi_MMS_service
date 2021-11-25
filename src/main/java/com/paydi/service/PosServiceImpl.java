@@ -180,16 +180,6 @@ public class PosServiceImpl {
 				return methodResponseModel;
 			}
 
-			// validate bank code
-			MMSBankEntity isBankValid = this.MMSBankRepository.findByCode(requestTerminalModel.getBankCode());
-			if (isBankValid == null) {
-				methodResponseModel.setIsSuccess(false);
-				methodResponseModel.setErrorCode(CommonConstant.API_CODE_BANK_NOT_FOUND);
-				methodResponseModel.setErrorMessage("error.msg.bank.not.found");
-
-				return methodResponseModel;
-			}
-
 			return methodResponseModel;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -209,7 +199,7 @@ public class PosServiceImpl {
 			MMSTerminalEntity terminalEntity = new MMSTerminalEntity();
 
 			terminalEntity.setMerchantId(requestTerminalModel.getMerchantId());
-			terminalEntity.setBankCode(requestTerminalModel.getBankCode());
+			// terminalEntity.setBankCode(requestTerminalModel.getBankCode());
 			terminalEntity.setModel(requestTerminalModel.getModel());
 			terminalEntity.setSerialNumber(requestTerminalModel.getSerialNumber());
 			terminalEntity.setFactory(requestTerminalModel.getFactory());
@@ -236,7 +226,7 @@ public class PosServiceImpl {
 		try {
 
 			terminalEntity.setMerchantId(requestTerminalModel.getMerchantId());
-			terminalEntity.setBankCode(requestTerminalModel.getBankCode());
+			// terminalEntity.setBankCode(requestTerminalModel.getBankCode());
 			terminalEntity.setModel(requestTerminalModel.getModel());
 			terminalEntity.setSerialNumber(requestTerminalModel.getSerialNumber());
 			terminalEntity.setFactory(requestTerminalModel.getFactory());

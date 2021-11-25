@@ -54,8 +54,8 @@ public class TerminalConverter {
 			terminalModel.setSetupAddress(terminalEntity.getSetupAddress());
 			terminalModel.setUpdatedBy(terminalEntity.getUpdatedBy());
 			terminalModel.setUpdatedDate(terminalEntity.getUpdatedDate());
-			MMSBankEntity bankCode = this.bankRepository.findByCode(terminalEntity.getBankCode());
-			terminalModel.setBankCode(bankCode);
+			// MMSBankEntity bankCode = this.bankRepository.findByCode(terminalEntity.getBankCode());
+			// terminalModel.setBankCode(bankCode);
 
 			MMSMerchantMasterEntity merchant = this.merchantMasterServiceImpl
 					.getMerchantById(terminalEntity.getMerchantId());
