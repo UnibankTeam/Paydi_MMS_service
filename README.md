@@ -5,6 +5,7 @@
 cd Paydi_MMS_service
 mvn clean package -DskipTests
 docker build -t paydi-mms-services:1.0.0 .
+docker stop <CONTAINER_ID>
 docker run -d --env-file app.env -p 8081:81 -t paydi-mms-services:1.0.0
 ```
 
