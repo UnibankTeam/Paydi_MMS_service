@@ -31,8 +31,8 @@ public class MMSTerminalEntity {
 	private String model;
 	@Column(name = "assets_code")
 	private String assetsCode;
-	@Column(name = "bank_code")
-	private String bankCode;
+	// @Column(name = "bank_code")
+	// private String bankCode;
 	@Column(name = "setup_address")
 	private String setupAddress;
 	@Column(name = "contract_no")
@@ -54,12 +54,13 @@ public class MMSTerminalEntity {
 		super();
 	}
 
-	public MMSTerminalEntity(long id, String serialNumber, String model, String bankCode, int status, Long createdBy,
-			Long updatedBy, Date updatedDate, Date createdDate) {
+	public MMSTerminalEntity(long id, String serialNumber, String model,
+			// String bankCode,
+			int status, Long createdBy, Long updatedBy, Date updatedDate, Date createdDate) {
 		this.id = id;
 		this.serialNumber = serialNumber;
 		this.model = model;
-		this.bankCode = bankCode;
+		// this.bankCode = bankCode;
 		this.status = status;
 		this.createdBy = createdBy;
 		this.updatedBy = updatedBy;
